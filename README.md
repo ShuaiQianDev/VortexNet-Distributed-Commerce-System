@@ -4,10 +4,11 @@ A comprehensive RESTful API for a distributed e-commerce platform, demonstrating
 
 ## 🎯 Project Overview
 
-This is a fully functional e-commerce system backend that implements:
+VortexNet is a fully functional e-commerce system backend that implements:
 - Clean REST API design with proper HTTP semantics
 - Three-layer architecture for maintainable code
 - Dependency injection and IoC container patterns
+- Database persistence with JPA/Hibernate
 - Scalable application structure for distributed systems
 - Best practices in Java enterprise development
 
@@ -37,7 +38,7 @@ This is a fully functional e-commerce system backend that implements:
 │    (Data Persistence)               │
 │    - Repository Pattern             │
 │    - Database Operations            │
-│    - Data Models                    │
+│    - ORM Mapping                    │
 └─────────────────────────────────────┘
 ```
 
@@ -48,33 +49,43 @@ This is a fully functional e-commerce system backend that implements:
 | Framework | Spring Boot | 3.5.15 |
 | Language | Java | 17+ |
 | Build Tool | Maven | 3.8+ |
+| Database | MySQL | 8.0.46 |
+| ORM | JPA/Hibernate | - |
 | Server | Embedded Tomcat | - |
 | API Style | RESTful | - |
-| Data Format | JSON | - |
 
 ## 📡 API Endpoints
 
-### User Management
+### Assignment 1: Basic REST APIs
+
 ```
 GET    /hello                    Simple greeting endpoint
 GET    /greeting?name=xxx        Greeting with query parameter
 GET    /user/{username}          Retrieve user information
 POST   /api/users                Create new user
-```
-
-### User Messaging
-```
 GET    /api/message              Retrieve message content
 POST   /api/messages             Create new message
 ```
 
-### TODO Management (CRUD Operations)
+### Assignment 2: TODO Management (CRUD)
+
 ```
 GET    /api/todos                Retrieve all TODO items
 GET    /api/todos/{id}           Retrieve specific TODO by ID
 POST   /api/todos                Create new TODO
 PUT    /api/todos/{id}           Update existing TODO
 DELETE /api/todos/{id}           Delete TODO
+```
+
+### Assignment 3: Product Management (CRUD) with Database
+
+```
+GET    /api/products             Retrieve all products
+GET    /api/products/{id}        Retrieve specific product by ID
+POST   /api/products             Create new product
+PUT    /api/products/{id}        Update existing product
+DELETE /api/products/{id}        Delete product
+GET    /api/products/search?keyword=xxx   Search products by name
 ```
 
 ## 📊 Project Structure
@@ -87,55 +98,62 @@ distributed-commerce-system/
 ├── CONTRIBUTING.md                    # Contribution guidelines
 │
 └── backend/
-    ├── pom.xml                        # Maven dependencies and build configuration
+    ├── pom.xml                        # Maven configuration
     │
     └── src/main/
         ├── java/com/example/demo/
-        │   ├── DemoApplication.java   # Spring Boot application entry point
+        │   ├── DemoApplication.java   # Spring Boot entry point
         │   │
         │   ├── controller/            # HTTP Request Handlers
-        │   │   ├── HelloController.java
-        │   │   └── TodoController.java
+        │   │   ├── HelloController.java      (Assignment 1)
+        │   │   ├── TodoController.java      (Assignment 2)
+        │   │   └── ProductController.java   (Assignment 3)
         │   │
         │   ├── service/               # Business Logic Layer
-        │   │   └── TodoService.java
+        │   │   ├── TodoService.java         (Assignment 2)
+        │   │   └── ProductService.java      (Assignment 3)
         │   │
-        │   ├── model/                 # Data Models (POJO)
-        │   │   └── Todo.java
+        │   ├── model/                 # Data Models
+        │   │   └── Todo.java                (Assignment 2)
+        │   │
+        │   ├── entity/                # JPA Entities
+        │   │   └── Product.java             (Assignment 3)
+        │   │
+        │   ├── repository/            # Data Access Layer
+        │   │   └── ProductRepository.java   (Assignment 3)
         │   │
         │   └── dto/                   # Data Transfer Objects
-        │       ├── Message.java
-        │       └── User.java
+        │       ├── Message.java             (Assignment 1)
+        │       └── User.java               (Assignment 1)
         │
         └── resources/
-            └── application.properties  # Application configuration
+            └── application.properties  # Database configuration
 ```
 
 ## 🔑 Key Features
 
-### Clean Code Architecture
-- Separation of concerns across three layers
-- Single Responsibility Principle
-- Dependency Injection for loose coupling
-- Repository pattern ready for database integration
+### Assignment 1: REST API Fundamentals ✅
+- 6 REST API endpoints
+- GET requests with various parameter types
+- POST requests with JSON body
+- Response serialization to JSON
 
-### RESTful API Design
-- Proper HTTP methods (GET, POST, PUT, DELETE)
-- Meaningful URI design
-- Appropriate HTTP status codes
-- JSON request/response format
+### Assignment 2: CRUD API with Service Layer ✅
+- Complete CRUD operations (Create, Read, Update, Delete)
+- Three-layer architecture implementation
+- Dependency Injection with @Autowired
+- Stream API for data queries
+- AtomicLong for thread-safe ID generation
+- In-memory data storage with ArrayList
 
-### Modern Java Patterns
-- Stream API for functional programming
-- Lambda expressions
-- Optional type for null safety
-- AtomicLong for thread-safe operations
-
-### Developer-Friendly
-- Comprehensive code comments
-- Clear naming conventions
-- Easy to understand and extend
-- Well-structured for team collaboration
+### Assignment 3: Repository and Database ✅
+- MySQL database integration
+- JPA/Hibernate ORM implementation
+- Repository pattern for data access
+- Entity mapping with annotations
+- Automatic table creation and schema management
+- Data persistence across application restarts
+- Complete CRUD with database operations
 
 ## 🛠️ Getting Started
 
@@ -144,6 +162,7 @@ distributed-commerce-system/
 ```
 - Java 17 or higher
 - Maven 3.8 or higher
+- MySQL 8.0 or higher
 - Git for version control
 - Postman or similar tool for API testing
 - IntelliJ IDEA (recommended)
@@ -157,327 +176,172 @@ git clone https://github.com/AlexQuinn-Analytics/distributed-commerce-system.git
 cd distributed-commerce-system
 ```
 
-2. **Navigate to the backend**
+2. **Navigate to backend**
 ```bash
 cd backend
 ```
 
-3. **Run the application**
+3. **Configure MySQL**
+- Ensure MySQL is running on localhost:3306
+- Create database: `ecommerce_db`
+- Update database credentials in `application.properties` if needed
+
+4. **Run the application**
 ```bash
 mvn spring-boot:run
 ```
 
-4. **Verify startup**
+5. **Verify startup**
 ```
 The application will start on http://localhost:8080
 You should see: "Started DemoApplication in X.XXX seconds"
 ```
 
-## 🧪 API Testing
+## 🧪 API Testing with Postman
 
-### Using Postman
+### Sample Requests
 
-#### Test 1: Get All TODOs
-```
-Method: GET
-URL: http://localhost:8080/api/todos
-Expected Response: 200 OK
-Body: 
-[
-    {
-        "id": 1,
-        "task": "Learn Spring Boot",
-        "completed": false
-    },
-    {
-        "id": 2,
-        "task": "Build REST API",
-        "completed": false
-    }
-]
-```
-
-#### Test 2: Create New TODO
+**Create a Product**
 ```
 Method: POST
-URL: http://localhost:8080/api/todos
+URL: http://localhost:8080/api/products
 Headers: Content-Type: application/json
 Body:
 {
-    "task": "Master distributed systems",
-    "completed": false
+    "name": "Laptop",
+    "price": 999.99,
+    "description": "High-performance gaming laptop",
+    "stock": 10
 }
 
 Expected Response: 201 Created
-Response Body:
-{
-    "id": 3,
-    "task": "Master distributed systems",
-    "completed": false
-}
 ```
 
-#### Test 3: Update TODO
+**Get All Products**
+```
+Method: GET
+URL: http://localhost:8080/api/products
+
+Expected Response: 200 OK
+Body: [list of all products]
+```
+
+**Get Product by ID**
+```
+Method: GET
+URL: http://localhost:8080/api/products/1
+
+Expected Response: 200 OK
+Body: {product details}
+```
+
+**Update Product**
 ```
 Method: PUT
-URL: http://localhost:8080/api/todos/1
+URL: http://localhost:8080/api/products/1
 Headers: Content-Type: application/json
 Body:
 {
-    "task": "Learn Spring Boot thoroughly",
-    "completed": true
+    "name": "Gaming Laptop Pro",
+    "price": 1299.99,
+    "description": "Ultimate gaming laptop",
+    "stock": 5
 }
 
 Expected Response: 200 OK
 ```
 
-#### Test 4: Delete TODO
+**Delete Product**
 ```
 Method: DELETE
-URL: http://localhost:8080/api/todos/2
+URL: http://localhost:8080/api/products/1
 
-Expected Response: 200 OK
-Body: "TODO with ID 2 has been successfully deleted."
+Expected Response: 204 No Content
 ```
 
-#### Test 5: Get Specific TODO
-```
-Method: GET
-URL: http://localhost:8080/api/todos/1
+## 💡 Core Concepts Implemented
 
-Expected Response: 200 OK
-Body:
-{
-    "id": 1,
-    "task": "Learn Spring Boot",
-    "completed": false
-}
-```
+### Three-Layer Architecture
+- **Controller Layer**: Handles HTTP requests and responses
+- **Service Layer**: Contains business logic and validation
+- **Repository Layer**: Manages data persistence with database
 
-## 💡 Core Concepts Explained
+### Dependency Injection
+- Uses `@Autowired` for loose coupling
+- Spring IoC Container manages bean lifecycle
+- Easy to test and maintain
 
-### Dependency Injection (@Autowired)
+### REST API Design
+- Proper HTTP methods (GET, POST, PUT, DELETE)
+- Meaningful URL paths
+- Appropriate HTTP status codes
+- JSON request/response format
 
-The application uses Spring's dependency injection to manage object creation and dependencies:
+### ORM with JPA/Hibernate
+- `@Entity` annotation for database mapping
+- `@Table` for table configuration
+- `@Column` for column constraints
+- `@Id` and `@GeneratedValue` for primary keys
+- Automatic SQL generation and execution
 
-```java
-@RestController
-public class TodoController {
-    @Autowired
-    private TodoService todoService;  // Spring automatically injects this
-}
-```
+### Design Patterns
+- **MVC Pattern**: Separation of concerns
+- **Dependency Injection**: Loose coupling
+- **Repository Pattern**: Data access abstraction
+- **Service Layer Pattern**: Business logic encapsulation
 
-**Benefits:**
-- Loose coupling between components
-- Easy to test (can inject mock objects)
-- Centralized object management
-- Easy to swap implementations
+## 📈 Learning Outcomes
 
-### Service Layer
-
-The `TodoService` handles all business logic:
-
-```java
-@Service
-public class TodoService {
-    public Todo save(Todo todo) {
-        // Create or update logic
-    }
-    
-    public Todo findById(Long id) {
-        // Stream API for data queries
-    }
-}
-```
-
-### REST Controller
-
-Controllers handle HTTP requests and delegate to services:
-
-```java
-@RestController
-@RequestMapping("/api/todos")
-public class TodoController {
-    @GetMapping
-    public List<Todo> getAllTodos() {
-        // HTTP GET handling
-    }
-}
-```
-
-## 📈 Design Patterns Implemented
-
-### Model-View-Controller (MVC)
-- Controllers handle HTTP layer
-- Services contain business logic
-- Models represent data
-
-### Repository Pattern
-- Data access abstraction (ready for implementation)
-- Easy to swap database implementations
-- Testable data layer
-
-### Dependency Injection Pattern
-- Spring IoC container manages beans
-- Constructor and field injection
-- Loose coupling between layers
-
-### Data Transfer Object (DTO)
-- Separate data representation layer
-- Message and User as DTOs
-- Enables flexible API responses
-
-## 🔄 Request Processing Flow
-
-```
-1. HTTP Request arrives
-   ↓
-2. Spring routes to Controller (@GetMapping, @PostMapping, etc.)
-   ↓
-3. Controller receives parameters (@PathVariable, @RequestBody)
-   ↓
-4. Controller calls Service method
-   ↓
-5. Service executes business logic
-   ↓
-6. Service returns result
-   ↓
-7. Controller formats response
-   ↓
-8. Spring serializes to JSON
-   ↓
-9. HTTP Response sent back
-```
-
-## 🎓 Learning Outcomes
-
-By studying this codebase, you will understand:
-
-✅ **Spring Boot Fundamentals**
-- Application structure
-- Component annotations (@Service, @Controller, etc.)
-- Configuration management
-
-✅ **REST API Design**
-- HTTP methods and semantics
-- URI design principles
-- Status codes and responses
-
-✅ **Clean Architecture**
-- Separation of concerns
-- Layered architecture
-- Dependency management
-
-✅ **Java Features**
-- Stream API and functional programming
-- Lambda expressions
-- Optional types
-- Concurrent programming (AtomicLong)
-
-✅ **Best Practices**
-- Code organization
-- Naming conventions
-- Documentation
-- Testing strategies
-
-## 📚 Code Examples
-
-### Creating a TODO
-```java
-// Client sends POST request
-POST /api/todos
-Content-Type: application/json
-{
-    "task": "New task",
-    "completed": false
-}
-
-// Server processes:
-// 1. TodoController receives the request
-// 2. Calls TodoService.save(todo)
-// 3. Service generates ID with counter.incrementAndGet()
-// 4. Adds to in-memory list
-// 5. Returns the created TODO with ID
-```
-
-### Querying TODOs
-```java
-// Client sends GET request
-GET /api/todos/1
-
-// Server processes:
-// 1. TodoController receives the request with id=1
-// 2. Calls TodoService.findById(1)
-// 3. Service uses Stream API to find matching TODO
-// 4. Returns the TODO or null
-```
+✅ Spring Boot fundamentals and configuration
+✅ REST API design and implementation
+✅ Three-layer architecture patterns
+✅ Dependency injection and IoC containers
+✅ JPA/Hibernate ORM and database mapping
+✅ MySQL database integration
+✅ Java 17+ features (Stream API, Lambda, Optional)
+✅ Git and GitHub workflow
+✅ Postman API testing
+✅ Professional code organization
 
 ## 🚀 Future Enhancements
 
-This project provides a solid foundation for further development:
-
-- **Database Integration**: Replace in-memory storage with MySQL/PostgreSQL
-- **Authentication**: Add JWT-based authentication
-- **Validation**: Implement input validation and error handling
-- **Testing**: Add unit and integration tests
-- **Logging**: Implement comprehensive logging
-- **Monitoring**: Add metrics and health checks
-- **Docker**: Containerize the application
-- **Microservices**: Split into independent services
+- Authentication with JWT tokens
+- Input validation and error handling
+- Unit and integration testing
+- API documentation with Swagger/OpenAPI
+- Pagination and filtering for list endpoints
+- Database transaction management
+- Caching with Redis
+- Docker containerization
+- Deployment to cloud platforms (AWS/Azure)
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
-- Code style
-- Commit conventions
-- Pull request process
-- Testing requirements
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-The MIT License permits:
-- ✅ Commercial use
-- ✅ Modification
-- ✅ Distribution
-- ✅ Private use
-
-With the requirement:
-- ⚠️ Include license and copyright notice
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
 **Alex Quinn**
 - GitHub: [@AlexQuinn-Analytics](https://github.com/AlexQuinn-Analytics)
-
-## 🙏 Acknowledgments
-
-- Spring Boot Official Documentation
-- Java Community Best Practices
-- RESTful API Design Principles
-- Clean Code and Architecture Books
-
-## 📞 Support
-
-For questions, issues, or suggestions:
-1. Check existing issues on GitHub
-2. Create a new issue with detailed description
-3. Include error messages and steps to reproduce
+- Project: VortexNet Distributed Commerce System
 
 ## 📊 Project Statistics
 
-- **Total API Endpoints**: 11
-- **Lines of Code**: ~500
-- **Code Comments**: Comprehensive
-- **Architecture Layers**: 3 (Controller, Service, Model/DTO)
-- **Design Patterns**: MVC, Dependency Injection, Repository Ready
+- **Total API Endpoints**: 16 (6 from Assignment 1, 5 from Assignment 2, 5 from Assignment 3)
+- **Code Files**: 10+ Java files
+- **Architecture Layers**: 3 (Controller, Service, Repository)
+- **Database Tables**: 2 (products, todos - in-memory)
+- **Design Patterns**: 4+ implemented patterns
+- **Status**: Active Development
 
 ---
 
-**Last Updated**: June 22, 2026  
-**Status**: Production-Ready  
-**Maintenance**: Active Development
+**Last Updated**: July 12, 2026  
+**Current Status**: Assignment 3 Complete ✅  
+**Maintenance**: Active  
 
 Made with ❤️ by Alex Quinn
