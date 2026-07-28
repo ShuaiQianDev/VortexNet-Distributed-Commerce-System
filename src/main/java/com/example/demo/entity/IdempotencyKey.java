@@ -74,4 +74,17 @@ public class IdempotencyKey {
         return expiresAt;
     }
 
+    public void setExpiresAt(LocalDateTime expiresAt) {
+        this.expiresAt = expiresAt;
+    }
+
+    public Boolean getIsProcessed() {
+        return isProcessed;
+    }
+
+    public void setIsProcessed(Boolean isProcessed) {
+        this.isProcessed = isProcessed;
+    }
+
+
   
