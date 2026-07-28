@@ -86,5 +86,15 @@ public class IdempotencyKey {
         this.isProcessed = isProcessed;
     }
 
+    @Override
+    public String toString() {
+        return "IdempotencyKey{" +
+                "key='" + key + '\'' +
+                ", clientRequestId='" + clientRequestId + '\'' +
+                ", isProcessed=" + isProcessed +
+                '}';
+    }
+}
+
 
   
