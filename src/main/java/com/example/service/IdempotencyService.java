@@ -135,3 +135,25 @@ public class IdempotencyService {
      * @param clientRequestId The unique idempotency key from client
      * @param response The serialized response (JSON string)
      */
+public void recordResponse(String clientRequestId, String response) {
+        Optional<IdempotencyKey> idempotencyKey = idempotencyKeyRepository
+                .findByClientRequestId(clientRequestId);
+
+        if (idempotencyKey.isPresent()) {
+            // Update database record
+            IdempotencyKey key = idempotencyKey.get();
+            key.setIsProcessed(true);
+            key.setResponse(response);
+            idempotencyKeyRepository.save(key);
+
+            // Update Redis cache with the actual response
+            String cacheKey = "idempotency:" + clientRequestId;
+            redisTemplate.opsForValue()
+                    .set(cacheKey, response, EXPIRY_SECONDS, TimeUnit.SECONDS);
+
+            log.info("Recorded response for idempotency key: {}", clientRequestId);
+        } else {
+            log.warn("Failed to find idempotency key to record response: {}", clientRequestId);
+        }
+    }
+}
