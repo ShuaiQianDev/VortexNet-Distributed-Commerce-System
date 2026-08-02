@@ -138,3 +138,18 @@ import java.util.UUID;
      * 
      * @return Status message
      */
+        @GetMapping("/health")
+    public ResponseEntity<?> health() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "healthy");
+        response.put("service", "idempotency-test");
+        response.put("timestamp", System.currentTimeMillis());
+        
+        return ResponseEntity.ok(response);
+    }
+    
+    /**
+     * Payment Test Request DTO
+     * 
+     * Contains payment information
+     */
