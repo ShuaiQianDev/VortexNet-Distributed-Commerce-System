@@ -33,7 +33,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/idempotency-test")
 @Slf4j
-public class IdempotencyTestController {
+    public class IdempotencyTestController {
     
     @Autowired
     private IdempotencyService idempotencyService;
@@ -65,7 +65,7 @@ public class IdempotencyTestController {
      * @param request The payment request details
      * @return Response with transaction details
      */
-@PostMapping("/payment")
+    @PostMapping("/payment")
     public ResponseEntity<?> testPayment(
         @RequestHeader(value = "X-Idempotency-Key", required = true) 
         String idempotencyKey,
@@ -131,7 +131,7 @@ public class IdempotencyTestController {
                 .body("Payment failed: " + e.getMessage());
         }
     }
- /**
+     /**
      * Health check endpoint
      * 
      * Simple endpoint to verify the application is running
