@@ -87,3 +87,47 @@ public class IdempotencyTestController {
                     .status(HttpStatus.OK)  // 200 OK, not 201
                     .body(existingResponse.get());
             }
+            // ===== Step 2: Record that we're processing this request =====
+            idempotencyService.recordRequest(idempotencyKey);
+            log.info("Recorded new request for key: {}", idempotencyKey);
+            
+            // ===== Step 3: Process the payment (simulate) =====
+            log.info("Processing payment...");
+            Thread.sleep(500);  // Simulate processing time
+            
+            // Generate response with transaction details
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", "success");
+            response.put("transactionId", UUID.randomUUID().toString());
+            response.put("amount", request.getAmount());
+            response.put("userId", request.getUserId());
+            response.put("timestamp", System.currentTimeMillis());
+            response.put("idempotencyKey", idempotencyKey);
+            response.put("message", "Payment processed successfully");
+            
+            // Convert response to JSON string for caching
+            String jsonResponse = new ObjectMapper().writeValueAsString(response);
+            
+            // ===== Step 4: Store response for future retries =====
+            idempotencyService.recordResponse(idempotencyKey, jsonResponse);
+            log.info("Payment processed and response cached for key: {}", idempotencyKey);
+            
+            // Return 201 Created for new payment
+            return ResponseEntity
+                .status(HttpStatus.CREATED)  // 201 Created
+                .body(response);
+                
+        } catch (InterruptedException e) {
+            log.error("Payment processing interrupted", e);
+            Thread.currentThread().interrupt();
+            return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Payment processing interrupted: " + e.getMessage());
+                
+        } catch (Exception e) {
+            log.error("Payment processing failed", e);
+            return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Payment failed: " + e.getMessage());
+        }
+    }
