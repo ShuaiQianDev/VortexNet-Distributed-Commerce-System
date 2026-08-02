@@ -131,3 +131,10 @@ public class IdempotencyTestController {
                 .body("Payment failed: " + e.getMessage());
         }
     }
+ /**
+     * Health check endpoint
+     * 
+     * Simple endpoint to verify the application is running
+     * 
+     * @return Status message
+     */
