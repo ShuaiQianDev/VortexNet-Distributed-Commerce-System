@@ -153,3 +153,43 @@ import java.util.UUID;
      * 
      * Contains payment information
      */
+        public static class PaymentTestRequest {
+        
+        private Double amount;
+        private String userId;
+        
+        // Constructors
+        public PaymentTestRequest() {
+        }
+        
+        public PaymentTestRequest(Double amount, String userId) {
+            this.amount = amount;
+            this.userId = userId;
+        }
+        
+        // Getters and Setters
+        public Double getAmount() {
+            return amount;
+        }
+        
+        public void setAmount(Double amount) {
+            this.amount = amount;
+        }
+        
+        public String getUserId() {
+            return userId;
+        }
+        
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+        
+        @Override
+        public String toString() {
+            return "PaymentTestRequest{" +
+                    "amount=" + amount +
+                    ", userId='" + userId + '\'' +
+                    '}';
+        }
+    }
+}
