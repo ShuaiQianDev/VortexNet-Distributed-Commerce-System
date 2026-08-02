@@ -65,3 +65,25 @@ public class IdempotencyTestController {
      * @param request The payment request details
      * @return Response with transaction details
      */
+@PostMapping("/payment")
+    public ResponseEntity<?> testPayment(
+        @RequestHeader(value = "X-Idempotency-Key", required = true) 
+        String idempotencyKey,
+        @RequestBody PaymentTestRequest request) {
+        
+        log.info("Processing payment with idempotency key: {}", idempotencyKey);
+        log.info("Amount: {}, User: {}", request.getAmount(), request.getUserId());
+        
+        try {
+            // ===== Step 1: Check if this request was already processed =====
+            Optional<String> existingResponse = idempotencyService.getExistingResponse(idempotencyKey);
+            
+            if (existingResponse.isPresent()) {
+                log.info("Cache hit! Returning existing response for key: {}", idempotencyKey);
+                
+                // This is a retry - return cached response
+                // This prevents duplicate charge!
+                return ResponseEntity
+                    .status(HttpStatus.OK)  // 200 OK, not 201
+                    .body(existingResponse.get());
+            }
