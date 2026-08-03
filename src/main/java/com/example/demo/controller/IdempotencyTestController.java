@@ -184,12 +184,4 @@ import java.util.UUID;
             this.userId = userId;
         }
         
-        @Override
-        public String toString() {
-            return "PaymentTestRequest{" +
-                    "amount=" + amount +
-                    ", userId='" + userId + '\'' +
-                    '}';
-        }
-    }
-}
+       
