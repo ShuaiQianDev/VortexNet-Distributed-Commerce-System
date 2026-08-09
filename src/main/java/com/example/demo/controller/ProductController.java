@@ -69,3 +69,18 @@ public class ProductController {
                     .body(new ApiResponse("error", e.getMessage(), null));
         }
     }
+    @GetMapping("/{id}/stock")
+    public ResponseEntity<?> getProductStock(@PathVariable Long id) {
+        log.info("GET /api/products/{}/stock - Fetching stock", id);
+
+        try {
+            Integer stock = productService.getProductStock(id);
+
+            return ResponseEntity.ok()
+                    .body(new ApiResponse("success", "Stock retrieved", stock));
+        } catch (Exception e) {
+            log.error("Error fetching stock", e);
+            return ResponseEntity.status(404)
+                    .body(new ApiResponse("error", e.getMessage(), null));
+        }
+    }
