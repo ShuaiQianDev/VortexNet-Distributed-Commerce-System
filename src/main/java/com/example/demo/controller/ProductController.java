@@ -31,3 +31,26 @@ public class ProductController {
                     .body(new ApiResponse("error", e.getMessage(), null));
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+        log.info("GET /api/products/{} - Fetching product", id);
+
+        long startTime = System.currentTimeMillis();
+
+        try {
+            Product product = productService.getProductById(id);
+
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - startTime;
+
+            log.info("Product fetched in {}ms", duration);
+
+            return ResponseEntity.ok()
+                    .header("X-Response-Time", duration + "ms")
+                    .body(new ApiResponse("success", "Product retrieved successfully", product));
+        } catch (Exception e) {
+            log.error("Error fetching product", e);
+            return ResponseEntity.status(404)
+                    .body(new ApiResponse("error", e.getMessage(), null));
+        }
+    }
