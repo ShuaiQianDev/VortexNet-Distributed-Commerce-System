@@ -30,4 +30,25 @@ public class ProductService {
         log.info("Fetching all products from in-memory store");
         return new ArrayList<>(productStore.values());
     }
+    @Cacheable(value = "products", key = "#productId")
+    public Product getProductById(Long productId) {
+        log.info("Fetching product from store (not from cache): productId={}", productId);
+
+        // 模拟数据库查询延迟
+        try {
+            Thread.sleep(100); // 100ms 延迟，模拟数据库查询
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        Product product = productStore.get(productId);
+
+        if (product == null) {
+            log.warn("Product not found: {}", productId);
+            throw new RuntimeException("Product not found with id: " + productId);
+        }
+
+        log.info("Product found: {}", product.getName());
+        return product;
+    }
     
