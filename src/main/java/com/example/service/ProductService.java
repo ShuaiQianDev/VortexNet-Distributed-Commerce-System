@@ -58,5 +58,18 @@ public class ProductService {
                 .filter(p -> p.getName().toLowerCase().contains(name.toLowerCase()))
                 .toList();
     }
+    public Integer getProductStock(Long productId) {
+        log.info("Fetching stock for product: {}", productId);
+
+        Product product = productStore.get(productId);
+
+        if (product == null) {
+            log.warn("Product not found for stock check: {}", productId);
+            throw new RuntimeException("Product not found with id: " + productId);
+        }
+
+        return product.getStock();
+    }
+}
     
     
