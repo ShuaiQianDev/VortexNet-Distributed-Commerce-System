@@ -51,4 +51,12 @@ public class ProductService {
         log.info("Product found: {}", product.getName());
         return product;
     }
+    public List<Product> searchByName(String name) {
+        log.info("Searching products by name: {}", name);
+
+        return productStore.values().stream()
+                .filter(p -> p.getName().toLowerCase().contains(name.toLowerCase()))
+                .toList();
+    }
+    
     
