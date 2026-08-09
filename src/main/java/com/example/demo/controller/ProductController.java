@@ -54,3 +54,18 @@ public class ProductController {
                     .body(new ApiResponse("error", e.getMessage(), null));
         }
     }
+    @GetMapping("/search")
+    public ResponseEntity<?> searchProducts(@RequestParam String name) {
+        log.info("GET /api/products/search?name={} - Searching products", name);
+
+        try {
+            List<Product> products = productService.searchByName(name);
+
+            return ResponseEntity.ok()
+                    .body(new ApiResponse("success", "Search completed", products));
+        } catch (Exception e) {
+            log.error("Error searching products", e);
+            return ResponseEntity.status(500)
+                    .body(new ApiResponse("error", e.getMessage(), null));
+        }
+    }
