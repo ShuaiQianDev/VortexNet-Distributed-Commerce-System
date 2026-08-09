@@ -84,3 +84,16 @@ public class ProductController {
                     .body(new ApiResponse("error", e.getMessage(), null));
         }
     }
+    public static class ApiResponse {
+        public String status;
+        public String message;
+        public Object data;
+
+        public ApiResponse(String status, String message, Object data) {
+            this.status = status;
+            this.message = message;
+            this.data = data;
+        }
+    }
+}
+
