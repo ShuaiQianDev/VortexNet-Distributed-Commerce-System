@@ -16,3 +16,18 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @GetMapping
+    public ResponseEntity<?> getAllProducts() {
+        log.info("GET /api/products - Fetching all products");
+
+        try {
+            List<Product> products = productService.getAllProducts();
+
+            return ResponseEntity.ok()
+                    .body(new ApiResponse("success", "Products retrieved successfully", products));
+        } catch (Exception e) {
+            log.error("Error fetching products", e);
+            return ResponseEntity.status(500)
+                    .body(new ApiResponse("error", e.getMessage(), null));
+        }
+    }
