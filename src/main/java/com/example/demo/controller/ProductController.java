@@ -9,3 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@RestController
+@RequestMapping("/api/products")
+@Slf4j
+public class ProductController {
+
+    @Autowired
+    private ProductService productService;
