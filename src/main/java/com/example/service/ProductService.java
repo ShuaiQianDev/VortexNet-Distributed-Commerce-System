@@ -26,3 +26,8 @@ public class ProductService {
         productStore.put(4L, new Product(4L, "Monitor", 299.99, 15));
         productStore.put(5L, new Product(5L, "Headset", 149.99, 25));
     }
+    public List<Product> getAllProducts() {
+        log.info("Fetching all products from in-memory store");
+        return new ArrayList<>(productStore.values());
+    }
+    
