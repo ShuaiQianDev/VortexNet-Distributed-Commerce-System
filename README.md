@@ -481,20 +481,11 @@ mvn spring-boot:run
 
 ---
 
-## 📚 Interview Key Points
-
-* **Technical Depth**: Direct implementation of cache-aside strategy, idempotency key checks, circuit breakers, and core linear algebra / set similarity algorithms in Java.
-* **System Design**: Clear horizontal partitioning across REST controllers, domain services, persistence stores, and asynchronous event streaming.
-* **Business Value**: Measureable metrics including 314x cache optimization, +28% recommendation CTR, and high system resiliency.
-
----
-
 ## 🤝 License & Contact
 
 * **License**: Open-source under the [MIT License](https://www.google.com/search?q=LICENSE).
 * **Author**: Alex Qian
 * **Email**: sqian1@uchicago.edu
-* **GitHub**: [AlexQuinn-Analytics](https://www.google.com/search?q=https://github.com/AlexQuinn-Analytics)
 * **LinkedIn**: Alex Qian
 * **Last Updated**: August 14, 2026
 
