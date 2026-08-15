@@ -1,37 +1,48 @@
 # VortexNet Distributed Commerce System
 
-📊 Project Overview
+# 📊 Project Overview
 
-VortexNet Catalyst is a comprehensive backend system for a distributed e-commerce platform built with Spring Boot 3.5.15. The project demonstrates advanced engineering practices across multiple domains:
+**VortexNet Catalyst** is a comprehensive backend system for a distributed e-commerce platform built with **Spring Boot 3.5.15**. The project demonstrates advanced engineering practices across multiple domains:
 
-Payment Processing: Resilient transaction handling with distributed idempotency
-Data Caching: Redis-based cache-aside pattern for 314x performance improvement
-Event Streaming: Asynchronous processing of 1M+ daily user events
-AI Integration: OpenAI GPT for intelligent search and recommendations
-Machine Learning: Hybrid recommendation system combining collaborative and content-based filtering
-System Reliability: 99.9% availability through circuit breaker patterns and graceful degradation
-🎯 Key Achievements
-Metric	Value	Impact
-Cache Performance	314x improvement	314ms → 1ms response time
-System Availability	99.9%	Resilience4j circuit breaker protection
-Daily Event Processing	1M+ events	Real-time user behavior analytics
-Concurrent Requests	500+ simultaneous	Non-blocking async architecture
-GPT Integration	99.9% uptime	Fallback strategies during API outages
-Recommendation CTR	+28% improvement	Hybrid filtering algorithm
-API Response Time	<50ms p95	Optimized query processing
-🏗️ Architecture
-System Design Overview
+* **Payment Processing**: Resilient transaction handling with distributed idempotency
+* **Data Caching**: Redis-based cache-aside pattern for 314x performance improvement
+* **Event Streaming**: Asynchronous processing of 1M+ daily user events
+* **AI Integration**: OpenAI GPT for intelligent search and recommendations
+* **Machine Learning**: Hybrid recommendation system combining collaborative and content-based filtering
+* **System Reliability**: 99.9% availability through circuit breaker patterns and graceful degradation
+
+---
+
+## 🎯 Key Achievements
+
+| Metric | Value | Impact |
+| :--- | :--- | :--- |
+| **Cache Performance** | **314x improvement** | 314ms → 1ms response time |
+| **System Availability** | **99.9%** | Resilience4j circuit breaker protection |
+| **Daily Event Processing** | **1M+ events** | Real-time user behavior analytics |
+| **Concurrent Requests** | **500+ simultaneous** | Non-blocking async architecture |
+| **GPT Integration** | **99.9% uptime** | Fallback strategies during API outages |
+| **Recommendation CTR** | **+28% improvement** | Hybrid filtering algorithm |
+| **API Response Time** | **<50ms p95** | Optimized query processing |
+
+---
+
+## 🏗️ Architecture
+
+
+```
+
 ┌─────────────────────────────────────────────────────────────────┐
 │                         CLIENT LAYER                             │
 │                    (REST API Endpoints)                          │
 └────────┬────────────────────────────────────────────────────────┘
-         │
+│
 ┌────────┴─────────────────────────────────────────────────────────┐
 │                     CONTROLLER LAYER                              │
 │  OrderController  │  ProductController  │  EventController        │
-│  PaymentController │  GPTController    │  RecommendationController
+│  PaymentController │  GPTController    │  RecommendationController│
 └────────┬──────────────────────────────────────────────────────────┘
-         │
+│
 ┌────────┴──────────────────────────────────────────────────────────┐
 │                      SERVICE LAYER                                │
 │  ┌──────────────────────────────────────────────────────────────┐ │
@@ -60,12 +71,12 @@ System Design Overview
 │  │ - RecommendationService (business logic)                     │ │
 │  └──────────────────────────────────────────────────────────────┘ │
 └────────┬──────────────────────────────────────────────────────────┘
-         │
+│
 ┌────────┴──────────────────────────────────────────────────────────┐
 │                    DATA ACCESS LAYER                              │
-│  OrderRepository  │  InventoryRepository  │  IdempotencyKeyRepository
+│  OrderRepository  │  InventoryRepository  │  IdempotencyKeyRepository│
 └────────┬──────────────────────────────────────────────────────────┘
-         │
+│
 ┌────────┴──────────────────────────────────────────────────────────┐
 │                   INFRASTRUCTURE LAYER                            │
 │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐ │
@@ -76,35 +87,22 @@ System Design Overview
 │  │ - Inventory      │  │                  │  │                  │ │
 │  └──────────────────┘  └──────────────────┘  └──────────────────┘ │
 └──────────────────────────────────────────────────────────────────┘
-Technology Stack
 
-Core Framework
+```
 
-Spring Boot 3.5.15
-Java 17
-Maven (Build)
+### Technology Stack
 
-Data & Caching
+* **Core Framework**: Spring Boot 3.5.15, Java 17, Maven
+* **Data & Caching**: MySQL, Redis, Spring Data JPA
+* **Reliability & Resilience**: Resilience4j (Circuit Breaker, Rate Limiter), Lombok
+* **External APIs**: OpenAI GPT API
+* **Development Tools**: IntelliJ IDEA, Postman, Git/GitHub
 
-MySQL (Persistent Storage)
-Redis (Distributed Cache & Idempotency)
-Spring Data JPA (ORM)
+---
 
-Reliability & Resilience
+## 📦 Project Structure
 
-Resilience4j (Circuit Breaker, Rate Limiter)
-Lombok (Boilerplate reduction)
-
-External APIs
-
-OpenAI GPT API (Intelligent features)
-
-Development Tools
-
-IntelliJ IDEA
-Postman (API Testing)
-Git/GitHub
-📦 Project Structure
+```text
 VortexNet Distributed Commerce System/
 ├── src/main/java/com/example/demo/
 │   ├── config/                          # Spring configurations
@@ -185,40 +183,53 @@ VortexNet Distributed Commerce System/
 │   └── application.properties            # Configuration
 │
 └── pom.xml                               # Maven dependencies
-🚀 Quick Start
-Prerequisites
-Java 17+
-Maven 3.8+
-MySQL 8.0+
-Redis 6.0+
-OpenAI API Key (for Phase 2.2)
-Installation
-Clone the repository
-bash
-git clone https://github.com/AlexQuinn-Analytics/VortexNet-Catalyst.git
+
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+* Java 17+
+* Maven 3.8+
+* MySQL 8.0+
+* Redis 6.0+
+* OpenAI API Key (for Phase 2.2)
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone [https://github.com/AlexQuinn-Analytics/VortexNet-Catalyst.git](https://github.com/AlexQuinn-Analytics/VortexNet-Catalyst.git)
 cd VortexNet-Catalyst
-Set up databases
 
-MySQL:
+```
 
-sql
+
+2. **Set up databases**
+* **MySQL**:
+```sql
 CREATE DATABASE vortexnet;
 USE vortexnet;
--- Tables created automatically by Spring Data JPA (spring.jpa.hibernate.ddl-auto=update)
 
-Redis:
+```
 
-bash
-# Start Redis server
+
+* **Redis**:
+```bash
 redis-server
-
-# Verify connection
 redis-cli ping  # Should return "PONG"
-Configure application
 
-Edit src/main/resources/application.properties:
+```
 
-properties
+
+
+
+3. **Configure application**
+Edit `src/main/resources/application.properties`:
+```properties
 # MySQL Configuration
 spring.datasource.url=jdbc:mysql://localhost:3306/vortexnet
 spring.datasource.username=root
@@ -228,37 +239,37 @@ spring.datasource.password=your_password
 spring.redis.host=localhost
 spring.redis.port=6379
 
-# OpenAI Configuration (for Phase 2.2)
+# OpenAI Configuration (Phase 2.2)
 openai.api.key=your-openai-api-key
-openai.api.url=https://api.openai.com/v1/chat/completions
+openai.api.url=[https://api.openai.com/v1/chat/completions](https://api.openai.com/v1/chat/completions)
 openai.api.timeout=30
 
 # Resilience4j Configuration
 resilience4j.circuitbreaker.instances.paymentService.failure-rate-threshold=50
 resilience4j.circuitbreaker.instances.paymentService.minimum-number-of-calls=5
-Build and run
-bash
-# Compile
-mvn clean compile
 
-# Run
+```
+
+
+4. **Build and run**
+```bash
+mvn clean compile
 mvn spring-boot:run
 
-# Or run JAR directly
-mvn clean package
-java -jar target/demo-0.0.1-SNAPSHOT.jar
-Verify startup
+```
 
-You should see:
 
-Started DemoApplication in X.XXX seconds
-Tomcat initialized with port(s): 8080
-📡 API Endpoints
-Phase 1: Payment System
 
-Create Order with Payment
+---
 
-POST /api/orders/create
+## 📡 API Endpoints
+
+### Phase 1: Payment System
+
+* **Create Order with Payment**
+* `POST /api/orders/create`
+* **Request Body**:
+```json
 {
     "userId": "user123",
     "productId": 1,
@@ -266,7 +277,11 @@ POST /api/orders/create
     "paymentMethod": "credit_card"
 }
 
-Response:
+```
+
+
+* **Response**:
+```json
 {
     "orderId": "ORD_123",
     "status": "PAID",
@@ -274,36 +289,51 @@ Response:
     "totalPrice": 1999.98
 }
 
-Check Payment Status
+```
 
-GET /api/payments/status?orderId=ORD_123
-Phase 2.1: Event Streaming
 
-Track User Events
 
-POST /api/events/page-view?userId=user123&productId=1
-POST /api/events/purchase?userId=user123&productId=1&amount=999.99
-POST /api/events/search?userId=user123&query=iPhone
 
-Response: {"status": "success"}
+* **Check Payment Status**
+* `GET /api/payments/status?orderId=ORD_123`
 
-Get Event Metrics
 
-GET /api/events/metrics
 
-Response:
+---
+
+### Phase 2.1: Event Streaming
+
+* **Track User Events**
+* `POST /api/events/page-view?userId=user123&productId=1`
+* `POST /api/events/purchase?userId=user123&productId=1&amount=999.99`
+* `POST /api/events/search?userId=user123&query=iPhone`
+* **Response**: `{"status": "success"}`
+
+
+* **Get Event Metrics**
+* `GET /api/events/metrics`
+* **Response**:
+```json
 {
     "pending_events": 0,
     "processed_events": 125,
     "timestamp": 1723413600000
 }
-Phase 2.2: LLM Integration
 
-Intelligent Search
+```
 
-POST /api/gpt/search?userId=user123&query=性价比高的手机
 
-Response:
+
+
+
+---
+
+### Phase 2.2: LLM Integration
+
+* **Intelligent Search**
+* `POST /api/gpt/search?userId=user123&query=性价比高的手机`
+* **Response**:
+```json
 {
     "status": "success",
     "results": [
@@ -312,14 +342,16 @@ Response:
     ]
 }
 
-Checkout Recommendations
+```
 
-POST /api/gpt/checkout-suggestions
-?userId=user123
 
-Body: {cartItems: [{id: 1, name: "iPhone"}]}
 
-Response:
+
+* **Checkout Recommendations**
+* `POST /api/gpt/checkout-suggestions?userId=user123`
+* **Request Body**: `{"cartItems": [{"id": 1, "name": "iPhone"}]}`
+* **Response**:
+```json
 {
     "suggested_items": [
         {"id": 3, "name": "Screen Protector", "price": 29.99},
@@ -329,23 +361,35 @@ Response:
     "new_total": 1079.98
 }
 
-Check Token Usage
+```
 
-GET /api/gpt/usage?userId=user123
 
-Response:
+
+
+* **Check Token Usage**
+* `GET /api/gpt/usage?userId=user123`
+* **Response**:
+```json
 {
     "used_tokens": 5000,
     "quota": 100000,
     "remaining_tokens": 95000
 }
-Phase 2.3: ML Recommendations
 
-Get Personalized Recommendations
+```
 
-GET /api/recommendations/for-user?userId=user123&topK=5
 
-Response:
+
+
+
+---
+
+### Phase 2.3: ML Recommendations
+
+* **Get Personalized Recommendations**
+* `GET /api/recommendations/for-user?userId=user123&topK=5`
+* **Response**:
+```json
 {
     "status": "success",
     "recommendations": [
@@ -355,293 +399,107 @@ Response:
     "duration_ms": 45
 }
 
-Get Popular Products
+```
 
-GET /api/recommendations/popular?topK=10
 
-Get Trending Products
 
-GET /api/recommendations/trending?topK=10
 
-Record User Interaction (for ML training)
+* **Get Popular & Trending Products**
+* `GET /api/recommendations/popular?topK=10`
+* `GET /api/recommendations/trending?topK=10`
 
-POST /api/recommendations/record-interaction
 
-Body:
+* **Record User Interaction**
+* `POST /api/recommendations/record-interaction`
+* **Request Body**:
+```json
 {
     "userId": "user123",
     "productId": 1,
-    "interactionType": "PURCHASE"  // or VIEW, SEARCH
+    "interactionType": "PURCHASE"
 }
-🧪 Testing with Postman
 
-Import the included Postman collection for easy API testing:
+```
 
-bash
-1. Open Postman
-2. Import: VortexNet-Catalyst.postman_collection.json
-3. Configure environment variables:
-   - {{base_url}} = http://localhost:8080
-   - {{user_id}} = user123
-4. Run test sequences for each phase
 
-Expected Results
 
-Phase 1: Payment flow complete in <500ms
-Phase 2.1: Events processed with <1ms ingestion latency
-Phase 2.2: GPT responses within 1 second
-Phase 2.3: Recommendations generated in <50ms
-🔑 Key Features Explained
-Phase 1: Resilient Payment System
 
-Redis-Backed Idempotency
 
-Prevents duplicate charges during network failures
-Each payment request gets a unique idempotency key
-If request retries, same result returned from cache
-Benefit: 100% safe payment processing
+---
 
-Cache-Aside Redis Caching
+## 🔑 Key Features Explained
 
-Product queries reduced from 314ms to 1ms (314x improvement)
-Automatic cache invalidation on product updates
-Reduces database load by ~60%
-Benefit: Lightning-fast product lookups
+### Phase 1: Resilient Payment System
 
-Resilience4j Circuit Breaker
+* **Redis-Backed Idempotency**: Prevents duplicate charges during network failures. Each payment request uses a unique key to cache and return consistent response data upon retries.
+* **Cache-Aside Caching**: Product read queries reduced from **314ms to 1ms** (314x speedup) with automatic cache invalidation, lowering database load by ~60%.
+* **Resilience4j Circuit Breaker**: Prevents cascading failures across services by isolating failures, holding 99.9% targeted availability.
 
-Payment service failures trigger automatic fallback
-Prevents cascading failures across system
-Maintains 99.9% availability even during partial outages
-Benefit: Graceful degradation under load
-Phase 2.1: Event-Driven Architecture
+### Phase 2.1: Event-Driven Architecture
 
-Asynchronous Event Streaming
+* **Asynchronous Event Streaming**: Non-blocking in-memory queue (<1ms ingestion latency) with scheduled batch execution handling up to 500+ concurrent requests.
+* **Real-Time Feature Extraction**: Converts incoming user activities into immediate ML feature vectors.
+* **1M+ Daily Scale**: Designed for continuous ingestion averaging ~11.6 events/sec with high burst allowance.
 
-User actions captured as events (views, purchases, searches)
-Events stored in memory queue (< 1ms ingestion)
-Background task processes events every 1 second
-Benefit: Non-blocking, can handle 500+ concurrent requests
+### Phase 2.2: AI-Powered Features
 
-Real-Time Feature Extraction
+* **Intelligent Product Search**: Extracts intent via GPT, matches local catalog keywords, and re-ranks results with clear explanations.
+* **Checkout Recommendations**: Analyzes active cart contents to propose high-affinity accessories, increasing Average Order Value (AOV).
+* **Token-Aware Rate Limiting**: Controls monthly API usage at the user tier to enforce strict cost predictability.
+* **Graceful Degradation**: Switches to localized fallback logic when upstream LLM endpoints encounter rate limits or outages.
 
-Events converted to ML-ready features
-Computed immediately as events arrive
-Features feed into recommendation system
-Benefit: Real-time personalization
+### Phase 2.3: ML Recommendations
 
-Supports 1M+ Daily Events
+* **Hybrid Engine**: Blends 40% Collaborative Filtering (Jaccard similarity) and 60% Content-Based Filtering (Cosine similarity) to yield a **+28% CTR boost**.
+* **Native Implementation**: Handcrafted algorithm implementations in pure Java without external framework dependencies.
+* **Sub-50ms Latency**: Generates real-time personalized product scoring in under 50 milliseconds.
 
-1M events/day = ~11.6 events/second average
-Peak handling: 500+ concurrent requests
-Memory-efficient queue management
-Benefit: Scales from startup to enterprise
-Phase 2.2: AI-Powered Features
+---
 
-Intelligent Product Search
+## 📊 Performance Benchmarks
 
-Natural language understanding via GPT
-"性价比高的手机" automatically extracted to: phones, good-value
-Searches local products by extracted keywords
-GPT re-ranks results with explanations
-Benefit: Better search results, improved user satisfaction
+* **Cache Performance**: 314ms (DB) → 1ms (Redis) **[314x faster]**
+* **System Reliability**: 99.9% target availability via circuit breakers; p95 latency <50ms
+* **Event Ingestion**: <1ms ingestion latency; handles 1M+ events/day
+* **AI & Recommendation Efficiency**: <1s GPT processing; <50ms recommendation algorithm evaluation
 
-Checkout Recommendations
+---
 
-GPT analyzes cart contents
-Suggests complementary products
-Increases average order value by ~8%
-Benefit: +$78K annual revenue on $10M platform
+## 🛠️ Debugging & Common Solutions
 
-Token-Aware Rate Limiting
+* **Redis Connection Refused**: Ensure server state with `redis-cli ping` and check port matching in `application.properties`.
+* **MySQL Connection Error**: Verify local MySQL service execution, port mapping, and ensure schema `vortexnet` exists.
+* **OpenAI API Rate Limits**: Monitor user quota usage at `/api/gpt/usage` or rely on the automated circuit breaker fallback.
 
-Limits not just requests/second but tokens/month
-Each user gets monthly token budget
-Prevents accidental $1000+ bills
-Benefit: Cost control, budget predictability
+---
 
-99.9% Availability via Graceful Degradation
+## 📈 Scaling Considerations
 
-When OpenAI fails, circuit breaker triggers
-Returns pre-set helpful responses
-System continues working at reduced capability
-Benefit: Reliable service even during API outages
-Phase 2.3: ML Recommendations
+* **Event Processing**: Transition from in-memory queueing to distributed brokers (AWS Kinesis, Apache Kafka, or RabbitMQ).
+* **Database Layer**: Implement read-replicas, database sharding by `userId`, and full-text search via Elasticsearch.
+* **Recommendation Pipelines**: Move offline vector computation to external batch services (AWS SageMaker) with fast key-value storage in Redis/DynamoDB.
 
-Hybrid Recommender (40% Collaborative + 60% Content)
+---
 
-Collaborative filtering: "Similar users bought X"
-Content-based: "Similar products to what you like"
-Hybrid: Best of both approaches
-Benefit: +28% click-through rate vs pure algorithms
+## 📚 Interview Key Points
 
-No ML Framework Needed
+* **Technical Depth**: Direct implementation of cache-aside strategy, idempotency key checks, circuit breakers, and core linear algebra / set similarity algorithms in Java.
+* **System Design**: Clear horizontal partitioning across REST controllers, domain services, persistence stores, and asynchronous event streaming.
+* **Business Value**: Measureable metrics including 314x cache optimization, +28% recommendation CTR, and high system resiliency.
 
-Implemented from scratch in pure Java
-Jaccard similarity for user similarity
-Cosine similarity for product similarity
-Benefit: Full understanding of ML concepts
+---
 
-Real-Time Personalization
+## 🤝 License & Contact
 
-Recommendations generated on-demand
-<50ms response time
-Adapts to user's latest behavior
-Benefit: Truly personalized experience
-📊 Performance Benchmarks
-Caching Performance
-Without caching:   314ms per query
-With Redis cache:  1ms per query
-Improvement:       314x faster ✅
-System Reliability
-Payment success rate:     99.9%
-System availability:      99.9% (with circuit breaker)
-API response time (p95):  <50ms
-Event Processing
-Daily event volume:       1M+ events
-Ingestion latency:        <1ms per event
-Processing throughput:    100-1000 events/second
-Concurrent requests:      500+
-AI Integration
-OpenAI response time:     ~1 second
-Fallback response time:   <100ms
-Cost per user/month:      ~$0.50
-Revenue impact:           +8% (checkout assistance)
-Recommendation Quality
-Cold-start handling:      ✅ Popular items fallback
-Recommendation latency:   <50ms
-Click-through rate:       +28% vs pure algorithms
-Diversity score:          High (avoids repetition)
-🛠️ Development & Debugging
-Common Issues & Solutions
+* **License**: Open-source under the [MIT License](https://www.google.com/search?q=LICENSE).
+* **Author**: Alex Qian
+* **Email**: sqian1@uchicago.edu
+* **GitHub**: [AlexQuinn-Analytics](https://www.google.com/search?q=https://github.com/AlexQuinn-Analytics)
+* **LinkedIn**: Alex Qian
+* **Last Updated**: August 14, 2026
 
-Issue: Redis Connection Refused
+```
 
-Error: Cannot connect to localhost:6379
+http://googleusercontent.com/action_card_content/4ca242ef-5e4b-4292-a955-654f695fbb8b
 
-Solution:
-1. Verify Redis is running: redis-cli ping
-2. Check Redis port in application.properties
-3. Restart Redis server: redis-server
-
-Issue: MySQL Connection Error
-
-Error: Communications link failure
-
-Solution:
-1. Verify MySQL is running
-2. Check credentials in application.properties
-3. Ensure database exists: CREATE DATABASE vortexnet;
-
-Issue: OpenAI API Rate Limit
-
-Error: 429 Too Many Requests
-
-Solution:
-1. Token quota exhausted
-2. Check user quota: GET /api/gpt/usage
-3. Reset monthly quota if needed
-4. Circuit breaker handles this gracefully
-
-Debugging Tips
-
-Enable debug logging: logging.level.com.example.demo=DEBUG
-Use Postman to test individual endpoints
-Check application logs for stack traces
-Verify database schema: DESCRIBE orders;
-Monitor Redis: redis-cli MONITOR
-📈 Scaling Considerations
-From 1M to 1B Daily Events
-
-Current Architecture Limits
-
-In-memory queue: 10,000 events (limited by heap)
-Single background task: ~1000 events/sec processing
-
-Scaling Strategy
-
-Option 1: Real AWS Kinesis
-- Replace LinkedBlockingQueue with AWS Kinesis Stream
-- Multiple consumer instances (auto-scaling)
-- Distributed processing
-
-Option 2: Kafka/RabbitMQ
-- Distributed message queue
-- Horizontal scaling
-- Fault tolerance
-
-Option 3: Lambda-based
-- Serverless event processing
-- Auto-scaling based on load
-- Pay-per-execution
-Database Optimization
-
-Current: Single MySQL instance
-
-Scaled Architecture:
-
-- Read replicas for analytics
-- Sharding by user_id for horizontal scaling
-- Redis as distributed cache
-- Elasticsearch for full-text search
-Recommendation System Scaling
-
-Current: In-memory user/product maps
-
-Scaled Architecture:
-
-- Store user profiles in DynamoDB
-- Pre-compute recommendations (batch job)
-- Cache recommendations in Redis
-- Use ML platform (SageMaker) for complex models
-📚 Interview Key Points
-Technical Depth
-Cache Performance: Explained 314x improvement via cache-aside pattern
-Distributed Systems: Idempotency keys for safe payment processing
-Resilience: Circuit breaker maintains 99.9% availability
-Async Architecture: Non-blocking design handles 500+ concurrent requests
-ML Algorithms: Implemented collaborative and content-based filtering from scratch
-System Design: Full vertical stack from API to database
-Problem-Solving
-Debug Story: Traced compilation errors → Spring startup → runtime NPE
-Root Cause Analysis: Followed stack trace to find null-safety issue
-Systematic Approach: Verified each layer before moving to next
-Idiomatic Solutions: Used Objects.equals for null-safe comparison
-Business Impact
-Revenue: +8% from checkout recommendations
-Performance: 314x cache improvement
-Reliability: 99.9% availability
-Scale: Processes 1M+ daily events
-Engineering Principles
-Separation of concerns (MVC architecture)
-API-first design (RESTful endpoints)
-Graceful degradation (fallback strategies)
-Monitoring & observability (comprehensive logging)
-Testing & verification (Postman test suite)
-📖 Documentation
-Architecture Deep Dive
-API Documentation
-Development Guide
-Debugging Guide
-Interview Stories
-🤝 Contributing
-
-This project is built for learning purposes. For improvements or bug reports, feel free to open an issue.
-
-📄 License
-
-This project is open source and available under the MIT License.
-
-🎯 Interview Ready?
-
-✅ All systems built and tested ✅ Complete debugging workflow documented ✅ Performance metrics verified ✅ API endpoints tested with Postman
-
-Next Steps: Practice interview storytelling and LeetCode preparation.
-
-📞 Contact
-
-Author: Alex Qian
-Email: sqian1@uchicago.edu
-LinkedIn: Alex Qian
-
-Last Updated: August 14, 2026
+```
